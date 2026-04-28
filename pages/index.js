@@ -46,15 +46,15 @@ export default function Home() {
   }
 
   async function callAPI(path, input) {
-    const res = await fetch("/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ apiKey: key, modelPath: path, input }),
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || "API error");
-    return data.url;
-  }
+  const res = await fetch("/api/generate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ modelPath: path, input }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || "API error");
+  return data.url;
+}
 
   async function generate() {
     if (!key.trim()) { setErr("Add your Replicate API key first!"); setShowK(true); return; }
