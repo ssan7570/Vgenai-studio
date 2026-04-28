@@ -2,10 +2,10 @@ import { useState, useRef } from "react";
 import Head from "next/head";
 
 const MODELS = [
-  { id: "wan-t2v", label: "Wan 2.1", icon: "🌊", desc: "8s", color: "#00f5d4", maxSec: 8, supports: ["text"], path: "wan-ai/wan2.1-t2v-480p", inp: ({ p, n, f }) => ({ prompt: p, negative_prompt: n, num_frames: f }) },
-  { id: "wan-i2v", label: "Wan I2V", icon: "🖼️", desc: "8s", color: "#a855f7", maxSec: 8, supports: ["image"], path: "wan-ai/wan2.1-i2v-480p", inp: ({ p, n, f, img }) => ({ prompt: p, negative_prompt: n, num_frames: f, image: img }) },
-  { id: "kling", label: "Kling 1.6", icon: "⚡", desc: "10s", color: "#ff6b35", maxSec: 10, supports: ["text", "image"], path: "kwaivgi/kling-v1.6-pro", inp: ({ p, n, img, ar }) => ({ prompt: p, negative_prompt: n, duration: "10", aspect_ratio: ar, ...(img ? { image: img } : {}) }) },
-  { id: "kling-ext", label: "Kling×2", icon: "🎬", desc: "20s", color: "#ffd700", maxSec: 20, supports: ["text", "image"], extended: true, path: "kwaivgi/kling-v1.6-pro", inp: ({ p, n, img, ar }) => ({ prompt: p, negative_prompt: n, duration: "10", aspect_ratio: ar, ...(img ? { image: img } : {}) }) },
+  { id: "wan-t2v", label: "Wan 2.1", icon: "🌊", desc: "8s", color: "#00f5d4", maxSec: 8, supports: ["text"], path: "fal-ai/wan/v2.1/1.3b/text-to-video", inp: ({ p, n }) => ({ prompt: p, negative_prompt: n }) },
+{ id: "wan-i2v", label: "Wan I2V", icon: "🖼️", desc: "8s", color: "#a855f7", maxSec: 8, supports: ["image"], path: "fal-ai/wan/v2.1/1.3b/image-to-video", inp: ({ p, n, img }) => ({ prompt: p, negative_prompt: n, image_url: img }) },
+{ id: "kling", label: "Kling 1.6", icon: "⚡", desc: "10s", color: "#ff6b35", maxSec: 10, supports: ["text","image"], path: "fal-ai/kling-video/v1.6/standard/text-to-video", inp: ({ p, n, ar }) => ({ prompt: p, negative_prompt: n, duration: "10", aspect_ratio: ar }) },
+{ id: "kling-ext", label: "Kling×2", icon: "🎬", desc: "20s", color: "#ffd700", maxSec: 20, supports: ["text","image"], extended: true, path: "fal-ai/kling-video/v1.6/standard/text-to-video", inp: ({ p, n, ar }) => ({ prompt: p, negative_prompt: n, duration: "10", aspect_ratio: ar }) },
 ];
 
 function wc(s) { return s.trim() === "" ? 0 : s.trim().split(/\s+/).length; }
