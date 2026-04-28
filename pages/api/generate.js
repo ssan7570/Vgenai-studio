@@ -1,7 +1,8 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
-  const { apiKey, modelPath, input } = req.body;
-  if (!apiKey) return res.status(400).json({ error: "API key required" });
+  const { modelPath, input } = req.body;
+  const apiKey = process.env.FAL_API_KEY;
+  if (!apiKey) return res.status(500).json({ error: "API key not configured" });
   try {
     const submitRes = await fetch(`https://queue.fal.run/${modelPath}`, {
       method: "POST",
@@ -23,7 +24,7 @@ export default async function handler(req, res) {
         });
         const result = await resultRes.json();
         const url = result.video?.url || result.videos?.[0]?.url;
-        if (!url) throw new Error("No video URL in response");
+        if (!url) throw new Error("No video in response");
         return res.status(200).json({ url });
       }
       if (status.status === "FAILED") throw new Error("Generation failed");
